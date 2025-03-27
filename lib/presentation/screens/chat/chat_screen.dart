@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/his_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
+import 'package:yes_no_app/presentation/widgets/shared/message_filed_box.dart';
+
 
 class ChatScreen extends StatelessWidget {
 
@@ -32,12 +36,17 @@ class _ChatView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column (
           children: [
-            Expanded(child: Container(
-              child: ListView.builder(itemBuilder: (context, index) {
-                return Text("Indice: $index");
+            Expanded(
+              child: ListView.builder(
+                itemCount:100,
+                itemBuilder: (context, index) {
+                  return(index % 2 == 0) 
+                    ? const MyMessageBubble()
+                    : const HisMessageBubble();
+
               },),
-            )),
-            Text("Hola"),
+            ),
+            MessageFiledBox(),
           
            ],
         ),

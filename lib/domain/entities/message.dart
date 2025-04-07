@@ -10,7 +10,8 @@ class Message {
   Message({
     required this.text, 
     this.imageUrl, 
-    required this.fromWho, required String Text});
+    required this.fromWho, 
+    required String Text});
 
 
 

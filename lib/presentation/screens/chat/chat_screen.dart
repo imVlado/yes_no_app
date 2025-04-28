@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/his_message_bubble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_bubble.dart';
@@ -36,6 +37,7 @@ class _ChatView extends StatelessWidget {
 
     //Le pide que este pendiente de cambios
     final chatProvider = context.watch<ChatProvider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -45,15 +47,19 @@ class _ChatView extends StatelessWidget {
               child: ListView.builder(
                 itemCount:ChatProvider().messageList.length,
                 itemBuilder: (context, index) {
-                  return(index % 2 == 0) 
-                    ? const HisMessageBubble()
-                    : const MyMessageBubble();
+                  //instancia que sabra de quien es el mensaje
+                  final message = chatProvider.messageList[index];
+                  //si es par es de ella, si no, es mio
+                  //return(index % 2 == 0)
+                  return(message.fromWho == FromWho.him)
+                    ? HisMessageBubble(message: message)
+                    : MyMessageBubble(message: message);
 
               },),
             ),
             MessageFiledBox(),
           
-           ],
+          ],
         ),
       ),
     );

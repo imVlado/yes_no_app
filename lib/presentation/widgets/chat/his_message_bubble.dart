@@ -20,14 +20,16 @@ class HisMessageBubble extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          child: Text(message.text, style: TextStyle(color: Colors.white, fontSize: 17), ),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          child: Text(message.text,
+            style: TextStyle(color: Colors.white, fontSize: 17), ),
         ),
         
         ),
       const SizedBox(height: 5.0),
-
-      _ImageBubble(),
+      //!: siempre muestra una imagen
+      _ImageBubble(imageUrl: message.imageUrl!),
+      const SizedBox(height: 10.0),
 
 
     ],
@@ -36,7 +38,9 @@ class HisMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
+  final String imageUrl;
 
+  const _ImageBubble({super.key, required this.imageUrl});
   @override
   Widget build(BuildContext context) {
 
@@ -44,7 +48,7 @@ class _ImageBubble extends StatelessWidget {
     return  ClipRRect(
       borderRadius : BorderRadius.circular(20),
       child: Image.network(
-        "https://yesno.wtf/assets/no/17-829284e9dd894ce9fb65fbe86d2e382c.gif",
+        imageUrl,
         width: size.width * 0.5,
         height: 170,
         fit: BoxFit.cover,
